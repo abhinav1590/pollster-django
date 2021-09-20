@@ -1,16 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1 class ="mb-5 text-center">{{ question.question_text }}</h1>
- 
-<ul class ="list-group mb-5">
+<h1>{{ question.question_text }}</h1>
+<style>
+    .list-group {margin:30px;text-align: center;}
+    ul {list-style-type: none;}
+    .success {margin: 10px}
+    .space {margin-left: 15vw;}
+    .btn-secondary {margin-right: 80px;}
+    .btn-dark {margin-left: 80px;}
+</style>
+<ul class ="list-group">
     {% for choice in question.choice_set.all %}
-    <li class ="list-group-item">
-        {{ choice.choice_text }} <span class ="badge badge-success float-right">{{ choice.votes }}
+    <li class ="success">
+        {{ choice.choice_text }} <span class="space">{{ choice.votes }}
             vote{{ choice.votes | pluralize }}</span>
     </li>
     {% endfor %}
 </ul>
  
-<a class ="btn btn-secondary" href ="{% url 'polls:index' %}">Back To Polls</a>
-<a class ="btn btn-dark" href ="{% url 'polls:detail' question.id %}">Vote again?</a>
+<a class ="btn-secondary" href ="{% url 'polls:index' %}">Back To Polls</a>
+<a class ="btn-dark" href ="{% url 'polls:detail' question.id %}">Vote again?</a>
 {% endblock %}
